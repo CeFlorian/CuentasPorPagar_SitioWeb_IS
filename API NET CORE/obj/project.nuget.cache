@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9FXylwjAWhzjadBzJP4hUqPkZw6vFMsOBMr+EkLe84s5mHbDWqb30PXlz6CzTeMBRPzTay8Szs/WoFEHFlAwLw==",
+  "dgSpecHash": "o+FacjUK7nACQ/Oi7pPPAMnek9SROPnGUtFmMftySKshgnK8novCJ9RobmiO4aEJgPaJHGcoF+rYJp990DHJCw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cesar\\Downloads\\Compressed\\Proyecto Final-Grupo No.1 Cuentas por pagar\\Proyecto Final-Grupo No.1 Cuentas por pagar\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "G:\\Mi unidad\\U-2-2021\\Ingenieria de Software\\Proyecto Mayo Cuentas por pagar\\CuentasPorPagar_SitioWeb\\CuentasPorPagar_SitioWeb_IS\\API NET CORE\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cesar\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Cesar\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.9\\microsoft.aspnetcore.jsonpatch.3.1.9.nupkg.sha512",

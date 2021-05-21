@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAPI.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -92,6 +92,19 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Rol",
+                columns: table => new
+                {
+                    RolId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descripcion = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rol", x => x.RolId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Factura",
                 columns: table => new
                 {
@@ -136,7 +149,7 @@ namespace WebAPI.Migrations
                         column: x => x.EstadoOrdenCompraId,
                         principalTable: "EstadoOrdenCompra",
                         principalColumn: "EstadoOrdenCompraId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrdenCompra_Proveedor_ProveedorId",
                         column: x => x.ProveedorId,
@@ -168,7 +181,7 @@ namespace WebAPI.Migrations
                         column: x => x.ProveedorId,
                         principalTable: "Proveedor",
                         principalColumn: "ProveedorId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,7 +209,29 @@ namespace WebAPI.Migrations
                         column: x => x.ProveedorId,
                         principalTable: "Proveedor",
                         principalColumn: "ProveedorId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuario",
+                columns: table => new
+                {
+                    UsuarioId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Correo = table.Column<string>(nullable: false),
+                    Contraseña = table.Column<string>(nullable: false),
+                    Nombre = table.Column<string>(nullable: false),
+                    RolId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuario", x => x.UsuarioId);
+                    table.ForeignKey(
+                        name: "FK_Usuario_Rol_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Rol",
+                        principalColumn: "RolId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,7 +258,7 @@ namespace WebAPI.Migrations
                         column: x => x.BancoId,
                         principalTable: "Banco",
                         principalColumn: "BancoId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Pago_Factura_FacturaId",
                         column: x => x.FacturaId,
@@ -235,7 +270,7 @@ namespace WebAPI.Migrations
                         column: x => x.FormaPagoId,
                         principalTable: "FormaPago",
                         principalColumn: "FormaPagoId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Pago_Proveedor_ProveedorId",
                         column: x => x.ProveedorId,
@@ -265,13 +300,13 @@ namespace WebAPI.Migrations
                         column: x => x.AlmacenId,
                         principalTable: "Almacen",
                         principalColumn: "AlmacenId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_IngresoCompra_Factura_FacturaId",
                         column: x => x.FacturaId,
                         principalTable: "Factura",
                         principalColumn: "FacturaId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_IngresoCompra_OrdenCompra_OrdenCompraId",
                         column: x => x.OrdenCompraId,
@@ -311,7 +346,7 @@ namespace WebAPI.Migrations
                         column: x => x.ProductoId,
                         principalTable: "Producto",
                         principalColumn: "ProductoId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -398,6 +433,11 @@ namespace WebAPI.Migrations
                 name: "IX_ProveedorBanco_ProveedorId",
                 table: "ProveedorBanco",
                 column: "ProveedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuario_RolId",
+                table: "Usuario",
+                column: "RolId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -418,6 +458,9 @@ namespace WebAPI.Migrations
                 name: "ProveedorBanco");
 
             migrationBuilder.DropTable(
+                name: "Usuario");
+
+            migrationBuilder.DropTable(
                 name: "Almacen");
 
             migrationBuilder.DropTable(
@@ -434,6 +477,9 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Banco");
+
+            migrationBuilder.DropTable(
+                name: "Rol");
 
             migrationBuilder.DropTable(
                 name: "EstadoOrdenCompra");
